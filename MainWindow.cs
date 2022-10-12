@@ -13,6 +13,8 @@ namespace weather_app
 {
     class MainWindow : Window
     {
+        /* 
+        ///// A RENAM /////
         [UI] private Label Title = null;
 		[UI] private Entry CityEntry = null;
 		[UI] private Button ConfirmButton1 = null;
@@ -26,26 +28,100 @@ namespace weather_app
         [UI] private Label _label6 = null;
         [UI] private Label _label7 = null;
         [UI] private Button _button1 = null;
-
-        private int _counter;
+        ///// /////
+        */
+        [UI] private Window main_window = null;
+        [UI] private Button home_main_button = null;
+        [UI] private Label fivedays_name_label = null;
+        [UI] private Label fivedays_coord_label = null;
+        [UI] private Label fivedays_temp_label1 = null;
+        [UI] private Label fivedays_temp_label2 = null;
+        [UI] private Label fivedays_temp_label3 = null;
+        [UI] private Label fivedays_temp_label4 = null;
+        [UI] private Label fivedays_temp_label5 = null;
+        [UI] private Label fivedays_date_label1 = null;
+        [UI] private Label fivedays_date_label2 = null;
+        [UI] private Label fivedays_date_label3 = null;
+        [UI] private Label fivedays_date_label4 = null;
+        [UI] private Label fivedays_date_label5 = null;
+        [UI] private Label fivedays_desc_label1 = null;
+        [UI] private Label fivedays_desc_label2 = null;
+        [UI] private Label fivedays_desc_label3 = null;
+        [UI] private Label fivedays_desc_label4 = null;
+        [UI] private Label fivedays_desc_label5 = null;
+        [UI] private Label fivedays_humid_label1 = null;
+        [UI] private Label fivedays_humid_label2 = null;
+        [UI] private Label fivedays_humid_label3 = null;
+        [UI] private Label fivedays_humid_label4 = null;
+        [UI] private Label fivedays_humid_label5 = null;
+        [UI] private Image fivedays_img_image1 = null;
+        [UI] private Image fivedays_img_image2 = null;
+        [UI] private Image fivedays_img_image3 = null;
+        [UI] private Image fivedays_img_image4 = null;
+        [UI] private Image fivedays_img_image5 = null;
 
         public MainWindow() : this(new Builder("MainWindow.glade")) { }
 
-        private MainWindow(Builder builder) : base(builder.GetRawOwnedObject("MainWindow"))
+        private MainWindow(Builder builder) : base(builder.GetRawOwnedObject("main_window"))
         {
             builder.Autoconnect(this);
-			entry.Text = "a";
+            Gtk.CssProvider provider = new CssProvider();
+            provider.LoadFromPath("style.css");
+            Gtk.StyleContext.AddProviderForScreen(Gdk.Screen.Default,provider,800);
+            main_window.StyleContext.AddClass("bg"); ////// Exemple pour appliquer du css sur un élément /////////
             DeleteEvent += Window_DeleteEvent;
-			_button1.Clicked += Button1_Clicked;
-			ConfirmButton1.Clicked += ConfirmButton1_Clicked;
+            home_main_button.Clicked += Home_Button_Clicked;
+            //entry.Text = "a";
+			//_button1.Clicked += Button1_Clicked;
+			//ConfirmButton1.Clicked += ConfirmButton1_Clicked;
         }
-       
         private void Window_DeleteEvent(object sender, DeleteEventArgs a)
         {
             Application.Quit();
         }
-        private async void Button1_Clicked(object sender, EventArgs a)
+
+        private async void Home_Button_Clicked(object sender, EventArgs a)
         {
+            
+            string html = string.Empty;
+            var client = new HttpClient();
+            html = await client.GetStringAsync("https://api.openweathermap.org/data/2.5/forecast?lat=44.34&lon=10.99&units=metric&lang=fr&appid=");
+            var result = JsonConvert.DeserializeObject<Item>(html);
+            for(int i=0;i<(result.list).Count;)
+            {
+                if((result.list[i].dt_txt.Hour) != 12)
+                {
+                    result.list.RemoveAt(i);
+                }else{
+                    i++;
+                }
+            }
+            
+            var fivedays_date_array = new[] { fivedays_date_label1,fivedays_date_label2,fivedays_date_label3,fivedays_date_label4,fivedays_date_label5 };
+            var fivedays_temp_array = new[] { fivedays_temp_label1,fivedays_temp_label2,fivedays_temp_label3,fivedays_temp_label4,fivedays_temp_label5 };
+            var fivedays_img_array = new[] { fivedays_img_image1,fivedays_img_image2,fivedays_img_image3,fivedays_img_image4,fivedays_img_image5 };
+            var fivedays_desc_array = new[] { fivedays_desc_label1,fivedays_desc_label2,fivedays_desc_label3,fivedays_desc_label4,fivedays_desc_label5} ;
+            var fivedays_humid_array = new[] { fivedays_humid_label1,fivedays_humid_label2,fivedays_humid_label3,fivedays_humid_label4,fivedays_humid_label5 };
+            
+            fivedays_name_label.Text = result.city.name;
+            fivedays_coord_label.Text = "lat: "+result.city.coord.lat +" lon: "+result.city.coord.lon;
+            
+            for(int k=0;k<(result.list).Count;k++)
+            {
+                fivedays_date_array[k].Text = (result.list[k].dt_txt).ToString(); 
+                fivedays_temp_array[k].Text = (result.list[k].main.temp+"°C");
+                fivedays_desc_array[k].Text = (result.list[k].weather[0].description);
+                fivedays_humid_array[k].Text = ("humidity: "+result.list[k].main.humidity+"%");
+                fivedays_img_array[k].Pixbuf = new Gdk.Pixbuf ("./img/"+result.list[k].weather[0].icon+".png");
+            }
+            return;
+             
+        }
+    
+
+        /*
+        private async void Button1_Clicked(object sender, EventArgs a)
+        {   
             String city = entry.Text;
             using var client = new HttpClient();
             String first = String.Format("http://api.openweathermap.org/geo/1.0/direct?q={0}&limit=5&appid=", city);
@@ -186,6 +262,8 @@ namespace weather_app
                 }
             }
 		}
+
+        
 		private async void ConfirmButton1_Clicked(object sender, EventArgs a)
 		{
 			HttpClient webclient = new HttpClient();
@@ -204,11 +282,45 @@ namespace weather_app
             }
 			
 		}
-	}
-
+	}*/
+}
 	public class ValueOfCities
 	{
 		public string name { get; set; }
 	    public List<ValueOfCities> objectList { get; set; }
 	}
+
+    public class Item
+    {
+        public List<Info> list;
+        public City city;
+    }
+
+    public class Info
+    {
+        public Detailled_info main;
+        public List<Detail_weather> weather;
+        public DateTime dt_txt;
+    }
+    public class Detailled_info
+    {
+        public string temp;
+        public string humidity;
+    }
+    public class Detail_weather
+    {
+        public string description;
+        public string icon;
+    }
+    public class City
+    {
+        public string name;
+        public Coord coord;
+    }
+    public class Coord
+    {
+        public string lat;
+        public string lon;
+    }
+
 }
