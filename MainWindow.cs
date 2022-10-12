@@ -16,7 +16,7 @@ namespace weather_app
         [UI] private Label Title = null;
 		[UI] private Entry CityEntry = null;
 		[UI] private Button ConfirmButton1 = null;
-		[UI] private Image image = null;
+        [UI] private Image image = null;
         [UI] private Entry entry = null;
         [UI] private Label _label1 = null;
         [UI] private Label _label2 = null;
@@ -39,15 +39,14 @@ namespace weather_app
 			_button1.Clicked += Button1_Clicked;
 			ConfirmButton1.Clicked += ConfirmButton1_Clicked;
         }
-
+       
         private void Window_DeleteEvent(object sender, DeleteEventArgs a)
         {
             Application.Quit();
         }
-
-		private async void Button1_Clicked(object sender, EventArgs a)
-		{
-			String city = entry.Text;
+        private async void Button1_Clicked(object sender, EventArgs a)
+        {
+            String city = entry.Text;
             using var client = new HttpClient();
             String first = String.Format("http://api.openweathermap.org/geo/1.0/direct?q={0}&limit=5&appid=", city);
             var content = await client.GetStringAsync(first);
@@ -185,7 +184,7 @@ namespace weather_app
                     }
                 
                 }
-            }           
+            }
 		}
 		private async void ConfirmButton1_Clicked(object sender, EventArgs a)
 		{
