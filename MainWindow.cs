@@ -85,7 +85,9 @@ namespace weather_app
             
             string html = string.Empty;
             var client = new HttpClient();
+            /// ATTENTION API KEY ///
             html = await client.GetStringAsync("https://api.openweathermap.org/data/2.5/forecast?lat=44.34&lon=10.99&units=metric&lang=fr&appid=");
+            ///
             var result = JsonConvert.DeserializeObject<Item>(html);
             for(int i=0;i<(result.list).Count;)
             {
