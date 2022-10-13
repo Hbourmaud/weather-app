@@ -13,25 +13,19 @@ namespace weather_app
 {
     class MainWindow : Window
     {
-        /* 
-        ///// A RENAM /////
-        [UI] private Label Title = null;
-		[UI] private Entry CityEntry = null;
-		[UI] private Button ConfirmButton1 = null;
-        [UI] private Image image = null;
-        [UI] private Entry entry = null;
-        [UI] private Label _label1 = null;
-        [UI] private Label _label2 = null;
-        [UI] private Label _label3 = null;
-        [UI] private Label _label4 = null;
-        [UI] private Label _label5 = null;
-        [UI] private Label _label6 = null;
-        [UI] private Label _label7 = null;
-        [UI] private Button _button1 = null;
-        ///// /////
-        */
+
+        [UI] private Image home_image_Image = null;
+        [UI] private Entry home_entry_Entry = null;
+        [UI] private Label home__label1_Label = null;
+        [UI] private Label home__label2_Label = null;
+        [UI] private Label home__label3_Label = null;
+        [UI] private Label home__label4_Label = null;
+        [UI] private Label home__label5_Label = null;
+        [UI] private Label home__label6_Label = null;
+        [UI] private Label home__label7_Label = null;
+        [UI] private Button home__button1_Button = null;
+
         [UI] private Window main_window = null;
-        [UI] private Button home_main_button = null;
         [UI] private Label fivedays_name_label = null;
         [UI] private Label fivedays_coord_label = null;
         [UI] private Label fivedays_temp_label1 = null;
@@ -70,10 +64,9 @@ namespace weather_app
             Gtk.StyleContext.AddProviderForScreen(Gdk.Screen.Default,provider,800);
             main_window.StyleContext.AddClass("bg"); ////// Exemple pour appliquer du css sur un élément /////////
             DeleteEvent += Window_DeleteEvent;
-            home_main_button.Clicked += Home_Button_Clicked;
-            //entry.Text = "a";
-			//_button1.Clicked += Button1_Clicked;
-			//ConfirmButton1.Clicked += ConfirmButton1_Clicked;
+            home_entry_Entry.Text = "a";
+			home__button1_Button.Clicked += home_button1_Button_Clicked;
+			//Confirmhome_button1_Button.Clicked += Confirmhome_button1_Button_Clicked;
         }
         private void Window_DeleteEvent(object sender, DeleteEventArgs a)
         {
@@ -119,15 +112,36 @@ namespace weather_app
             return;
              
         }
-    
 
-        /*
-        private async void Button1_Clicked(object sender, EventArgs a)
+        private async void home_button1_Button_Clicked(object sender, EventArgs a)
         {   
-            String city = entry.Text;
+            home__label1_Label.Text = "";
+            home__label2_Label.Text = "";
+            home__label3_Label.Text = "";
+            home__label4_Label.Text = "";
+            home__label5_Label.Text = "";
+            home__label6_Label.Text = "";
+            home__label7_Label.Text = "";
+            home_image_Image.Pixbuf = null;
+            String city = home_entry_Entry.Text;
+            for (int m = 0; m< city.Length; m++)
+            {
+                if (city[m] == '0' || city[m] == '1' || city[m] == '2' || city[m] == '3' || city[m] == '4' || city[m] == '5' || city[m] == '6' || city[m] == '7' || city[m] == '8' || city[m] == '9')
+            {
+                home__label1_Label.Text= "non-existent city";
+                return; 
+            }
+            }
             using var client = new HttpClient();
+            var content = "";
             String first = String.Format("http://api.openweathermap.org/geo/1.0/direct?q={0}&limit=5&appid=", city);
-            var content = await client.GetStringAsync(first);
+            content = await client.GetStringAsync(first);
+            if (content.Length == 2)
+            {
+                home__label1_Label.Text= "non-existent city";
+                return; 
+            }
+            Home_Button_Clicked(sender, a);
             String name ="";
             String lat = "";
             String lon = "";
@@ -138,7 +152,7 @@ namespace weather_app
             String icon = "";
             for (int i = 0; i < content.Length; i++)
             {
-                if (content[i]=='f' && content[i+1]== 'r' && testify == false)
+                if (content[i]=='f' && content[i+1]== 'r' && testify == false) // à changer avec le .machin
                 {
                     int u =i+5;
                     for (int j = u; j < content.Length; j++)
@@ -147,7 +161,7 @@ namespace weather_app
                         {
                             NeededInformation += "City: " + name ;
                             testify = true;
-                            _label1.Text = NeededInformation;
+                            home__label1_Label.Text = NeededInformation;
                             NeededInformation = "";
                             break;
                         }
@@ -163,7 +177,7 @@ namespace weather_app
                         {
                             NeededInformation += "Lat: " +lat;
                             testify1 = true;
-                            _label2.Text = NeededInformation;
+                            home__label2_Label.Text = NeededInformation;
                             NeededInformation = "";
                             break;
                         }
@@ -179,7 +193,7 @@ namespace weather_app
                         {
                             NeededInformation += "Lon: " +lon ;
                             testify2 = true;
-                            _label3.Text = NeededInformation;
+                            home__label3_Label.Text = NeededInformation;
                             NeededInformation = "";
                             break;
                         }
@@ -207,7 +221,7 @@ namespace weather_app
                         {
                             NeededInformation += "Temperature: " + temp + "°C ";
                             testify9 = true;
-                            _label4.Text = NeededInformation;
+                            home__label4_Label.Text = NeededInformation;
                             NeededInformation = "";
                             break;
                         }
@@ -221,9 +235,9 @@ namespace weather_app
                     {
                         if (otherscontent[j] == '"')
                         {
-                            _label4.Text = icon;
+                            //home__label4_Label.Text = icon; // bizarre
                             String picture = String.Format("./img/{0}.png", icon);
-                            image.Pixbuf = new Gdk.Pixbuf (picture);
+                            home_image_Image.Pixbuf = new Gdk.Pixbuf (picture);
                             testify6 = true;
                             break;
                         }
@@ -238,7 +252,7 @@ namespace weather_app
                         {
                             NeededInformation += "Weather: " + desc ;
                             testify8 = true;
-                            _label5.Text = NeededInformation;
+                            home__label5_Label.Text = NeededInformation;
                             NeededInformation = "";
                             break;
                         }
@@ -254,7 +268,7 @@ namespace weather_app
                         {
                             NeededInformation += "Humidity: " + hum + "%";
                             testify7 = true;
-                            _label6.Text = NeededInformation;
+                            home__label6_Label.Text = NeededInformation;
                             NeededInformation = "";
                             break;
                         }
@@ -264,12 +278,13 @@ namespace weather_app
                 }
             }
 		}
+    }
 
         
-		private async void ConfirmButton1_Clicked(object sender, EventArgs a)
+		/*private async void ConfirmButton1_Clicked(object sender, EventArgs a)
 		{
 			HttpClient webclient = new HttpClient();
-			var input = CityEntry.Text;
+			var input = home_CityEntry_Entry.Text;
 			var lien = String.Format("http://api.openweathermap.org/geo/1.0/direct?q={0}&limit=5&appid=", input);
 			try
 			{
@@ -284,8 +299,8 @@ namespace weather_app
             }
 			
 		}
-	}*/
-}
+	}
+    */
 	public class ValueOfCities
 	{
 		public string name { get; set; }
