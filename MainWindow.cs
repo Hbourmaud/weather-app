@@ -53,12 +53,21 @@ namespace weather_app
         [UI] private Image fivedays_img_image3 = null;
         [UI] private Image fivedays_img_image4 = null;
         [UI] private Image fivedays_img_image5 = null;
+		[UI] private Label settings_resultCity_Label = null;
+		[UI] private Entry settings_city_Entry = null;
+		[UI] private Button settings_confirm_Button = null;
+		[UI] private Label settings_resultLanguage_Label = null;
+		[UI] private Entry settings_confirmLanguage_Entry = null;
+		[UI] private Button settings_confirmLanguage_Button = null;
+
+
 
         public MainWindow() : this(new Builder("MainWindow.glade")) { }
 
         private MainWindow(Builder builder) : base(builder.GetRawOwnedObject("main_window"))
         {
             builder.Autoconnect(this);
+			Check();
             Gtk.CssProvider provider = new CssProvider();
             provider.LoadFromPath("style.css");
             Gtk.StyleContext.AddProviderForScreen(Gdk.Screen.Default,provider,800);
@@ -67,6 +76,8 @@ namespace weather_app
             home_entry_Entry.Text = "a";
 			home__button1_Button.Clicked += home_button1_Button_Clicked;
 			//Confirmhome_button1_Button.Clicked += Confirmhome_button1_Button_Clicked;
+			settings_confirm_Button.Clicked += settings_confirm_button_Clicked;
+			settings_confirmLanguage_Button.Clicked += settings_confirmLanguage_button_Clicked;
         }
         private void Window_DeleteEvent(object sender, DeleteEventArgs a)
         {
@@ -278,29 +289,59 @@ namespace weather_app
                 }
             }
 		}
-    }
 
-        
-		/*private async void ConfirmButton1_Clicked(object sender, EventArgs a)
+		private async void settings_confirm_button_Clicked(object sender, EventArgs a)
 		{
 			HttpClient webclient = new HttpClient();
-			var input = home_CityEntry_Entry.Text;
+			var input = settings_city_Entry.Text;
 			var lien = String.Format("http://api.openweathermap.org/geo/1.0/direct?q={0}&limit=5&appid=", input);
 			try
 			{
 				var content = await webclient.GetStringAsync(lien);
 				var test = JsonConvert.DeserializeObject<ValueOfCities[]>(content);
 				var result = test[0].name;
-				Title.Text = result;
+				settings_resultCity_Label.Text = result;
+				AddValue();
 			}
 			catch (Exception e)
             {
-                Title.Text = "error";
             }
-			
 		}
-	}
-    */
+
+		private void settings_confirmLanguage_button_Clicked(object sender, EventArgs a)
+		{
+			settings_resultLanguage_Label.Text = settings_confirmLanguage_Entry.Text;
+			AddValue();
+		}
+
+		private void Check()
+		{
+			// Checking the existence of the specified
+			if (File.Exists("options.json")) {
+				string json = File.ReadAllText("options.json");	
+				dynamic jsonObj = Newtonsoft.Json.JsonConvert.DeserializeObject(json);
+				settings_resultCity_Label.Text = jsonObj["CityDefault"];
+				settings_confirmLanguage_Entry.Text = jsonObj["LanguageDefault"];
+			}
+			else {
+				string path = @"options.json";
+				using (FileStream fs = File.Create(path));
+				string result = "{\x0A \"CityDefault\": \"\",\x0A \"LanguageDefault\": \"English\"\n}";
+				File.WriteAllText(@"options.json", result);
+				settings_confirmLanguage_Entry.Text = "English";
+			}
+		}
+
+		private void AddValue() {
+			string json = File.ReadAllText("options.json");
+			dynamic jsonObj = Newtonsoft.Json.JsonConvert.DeserializeObject(json);
+			jsonObj["CityDefault"] = settings_resultCity_Label.Text;
+			jsonObj["LanguageDefault"] = settings_confirmLanguage_Entry.Text;
+			string output = Newtonsoft.Json.JsonConvert.SerializeObject(jsonObj, Newtonsoft.Json.Formatting.Indented);
+			File.WriteAllText("options.json", output);
+		}
+    }
+	
 	public class ValueOfCities
 	{
 		public string name { get; set; }
