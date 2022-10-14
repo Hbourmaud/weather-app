@@ -8,6 +8,7 @@ namespace weather_app
         [STAThread]
         public static void Main(string[] args)
         {
+            DotNetEnv.Env.Load();
             Application.Init();
 
             var app = new Application("org.weather_app.weather_app", GLib.ApplicationFlags.None);

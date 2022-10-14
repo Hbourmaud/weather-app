@@ -12,8 +12,8 @@ using System.Threading.Tasks;
 namespace weather_app
 {
     class MainWindow : Window
-    {
-
+    {   
+        string API_KEY = System.Environment.GetEnvironmentVariable("API_KEY");
         [UI] private Image home_image_Image = null;
         [UI] private Entry home_entry_Entry = null;
         [UI] private Label home__label1_Label = null;
@@ -53,14 +53,13 @@ namespace weather_app
         [UI] private Image fivedays_img_image3 = null;
         [UI] private Image fivedays_img_image4 = null;
         [UI] private Image fivedays_img_image5 = null;
+
 		[UI] private Label settings_resultCity_Label = null;
 		[UI] private Entry settings_city_Entry = null;
 		[UI] private Button settings_confirm_Button = null;
 		[UI] private Label settings_resultLanguage_Label = null;
 		[UI] private Entry settings_confirmLanguage_Entry = null;
 		[UI] private Button settings_confirmLanguage_Button = null;
-
-
 
         public MainWindow() : this(new Builder("MainWindow.glade")) { }
 
@@ -75,7 +74,6 @@ namespace weather_app
             DeleteEvent += Window_DeleteEvent;
             home_entry_Entry.Text = "a";
 			home__button1_Button.Clicked += home_button1_Button_Clicked;
-			//Confirmhome_button1_Button.Clicked += Confirmhome_button1_Button_Clicked;
 			settings_confirm_Button.Clicked += settings_confirm_button_Clicked;
 			settings_confirmLanguage_Button.Clicked += settings_confirmLanguage_button_Clicked;
         }
@@ -84,14 +82,11 @@ namespace weather_app
             Application.Quit();
         }
 
-        private async void Home_Button_Clicked(object sender, EventArgs a)
+        private async void ForecastFiveDays(object sender, EventArgs a,string lat,string lon)
         {
-            
             string html = string.Empty;
             var client = new HttpClient();
-            /// ATTENTION API KEY ///
-            html = await client.GetStringAsync("https://api.openweathermap.org/data/2.5/forecast?lat=44.34&lon=10.99&units=metric&lang=fr&appid=");
-            ///
+            html = await client.GetStringAsync(String.Format("https://api.openweathermap.org/data/2.5/forecast?lat={0}&lon={1}&units=metric&lang=fr&appid={2}", lat, lon, API_KEY));
             var result = JsonConvert.DeserializeObject<Item>(html);
             for(int i=0;i<(result.list).Count;)
             {
@@ -114,7 +109,7 @@ namespace weather_app
             
             for(int k=0;k<(result.list).Count;k++)
             {
-                fivedays_date_array[k].Text = (result.list[k].dt_txt).ToString(); 
+                fivedays_date_array[k].Text = (result.list[k].dt_txt).ToString("MMMM dd hh:00")+"pm";
                 fivedays_temp_array[k].Text = (result.list[k].main.temp+"°C");
                 fivedays_desc_array[k].Text = (result.list[k].weather[0].description);
                 fivedays_humid_array[k].Text = ("humidity: "+result.list[k].main.humidity+"%");
@@ -145,14 +140,13 @@ namespace weather_app
             }
             using var client = new HttpClient();
             var content = "";
-            String first = String.Format("http://api.openweathermap.org/geo/1.0/direct?q={0}&limit=5&appid=", city);
+            String first = String.Format("http://api.openweathermap.org/geo/1.0/direct?q={0}&limit=5&appid={1}", city, API_KEY);
             content = await client.GetStringAsync(first);
             if (content.Length == 2)
             {
                 home__label1_Label.Text= "non-existent city";
                 return; 
             }
-            Home_Button_Clicked(sender, a);
             String name ="";
             String lat = "";
             String lon = "";
@@ -212,7 +206,8 @@ namespace weather_app
                     }
                 }
             }
-            String second = String.Format("https://api.openweathermap.org/data/2.5/weather?lat={0}&lon={1}&appid=&units=metric", lat, lon);
+            ForecastFiveDays(sender,a,lat,lon);
+            String second = String.Format("https://api.openweathermap.org/data/2.5/weather?lat={0}&lon={1}&units=metric&appid={2}", lat, lon, API_KEY);
             var otherscontent = await client.GetStringAsync(second);
             Boolean testify9 = false;
             Boolean testify8 = false;
@@ -294,7 +289,7 @@ namespace weather_app
 		{
 			HttpClient webclient = new HttpClient();
 			var input = settings_city_Entry.Text;
-			var lien = String.Format("http://api.openweathermap.org/geo/1.0/direct?q={0}&limit=5&appid=", input);
+			var lien = String.Format("http://api.openweathermap.org/geo/1.0/direct?q={0}&limit=5&appid={1}", input,API_KEY);
 			try
 			{
 				var content = await webclient.GetStringAsync(lien);
@@ -303,7 +298,7 @@ namespace weather_app
 				settings_resultCity_Label.Text = result;
 				AddValue();
 			}
-			catch (Exception e)
+			catch
             {
             }
 		}
