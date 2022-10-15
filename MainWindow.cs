@@ -89,11 +89,11 @@ namespace weather_app
             Application.Quit();
         }
 
-        private async void ForecastFiveDays(object sender, EventArgs a,string lat,string lon)
+        private async void ForecastFiveDays(object sender, EventArgs a,string lat,string lon,string lang,string namecity)
         {
             string html = string.Empty;
             var client = new HttpClient();
-            html = await client.GetStringAsync(String.Format("https://api.openweathermap.org/data/2.5/forecast?lat={0}&lon={1}&units=metric&lang=fr&appid={2}", lat, lon, API_KEY));
+            html = await client.GetStringAsync(String.Format("https://api.openweathermap.org/data/2.5/forecast?lat={0}&lon={1}&units=metric&lang={2}&appid={3}", lat, lon,lang, API_KEY));
             var result = JsonConvert.DeserializeObject<Item>(html);
             for(int i=0;i<(result.list).Count;)
             {
@@ -111,7 +111,7 @@ namespace weather_app
             var fivedays_desc_array = new[] { fivedays_desc_label1,fivedays_desc_label2,fivedays_desc_label3,fivedays_desc_label4,fivedays_desc_label5} ;
             var fivedays_humid_array = new[] { fivedays_humid_label1,fivedays_humid_label2,fivedays_humid_label3,fivedays_humid_label4,fivedays_humid_label5 };
             
-            fivedays_name_label.Text = result.city.name;
+            fivedays_name_label.Text = namecity;
             fivedays_coord_label.Text = "lat: "+result.city.coord.lat +" lon: "+result.city.coord.lon;
             
             for(int k=0;k<(result.list).Count;k++)
@@ -170,28 +170,21 @@ namespace weather_app
             String lat = "";
             String lon = "";
             String NeededInformation = "";
-            Boolean testify = false;
             Boolean testify1 = false;
             Boolean testify2 = false;
             String icon = "";
+            dynamic jsonObjgeo = Newtonsoft.Json.JsonConvert.DeserializeObject(content);
+            home__label1_Label.Text = LAng;
+            name = jsonObjgeo[0]["local_names"][LAng];
+            if (name == null)
+            {
+                name = jsonObjgeo[0]["name"];
+            }
             for (int i = 0; i < content.Length; i++)
             {
-                if (content[i]=='f' && content[i+1]== 'r' && testify == false) // à changer avec le .machin
-                {
-                    int u =i+5;
-                    for (int j = u; j < content.Length; j++)
-                    {
-                        if (content[j] == '"')
-                        {
-                            NeededInformation += "City: " + name ;
-                            testify = true;
-                            home__label1_Label.Text = NeededInformation;
-                            NeededInformation = "";
-                            break;
-                        }
-                        name += content[j];
-                    }
-                }
+                NeededInformation += "City: " + name ;
+                home__label1_Label.Text = NeededInformation;
+                NeededInformation = "";
                 if (content[i]=='l' && content[i+1]== 'a' &&  content[i+2]== 't' && testify1 == false)
                 {
                     int u =i+5;
@@ -225,7 +218,7 @@ namespace weather_app
                     }
                 }
             }
-            ForecastFiveDays(sender,a,lat,lon);
+            ForecastFiveDays(sender,a,lat,lon,LAng,name);
             String second = String.Format("https://api.openweathermap.org/data/2.5/weather?lat={0}&lon={1}&units=metric&appid={2}&lang={3}", lat, lon, API_KEY,LAng);
             var otherscontent = await client.GetStringAsync(second);
             Boolean testify9 = false;
