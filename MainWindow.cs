@@ -83,13 +83,20 @@ namespace weather_app
 			home__button1_Button.Clicked += home_button1_Button_Clicked;
 			settings_confirm_Button.Clicked += settings_confirm_button_Clicked;
 			settings_confirmLanguage_Button.Clicked += settings_confirmLanguage_button_Clicked;
+            string json = File.ReadAllText("options.json");	
+			dynamic jsonObj = Newtonsoft.Json.JsonConvert.DeserializeObject(json);
+			if(jsonObj["CityDefault"] != "")
+            {
+                homeResearch((jsonObj["CityDefault"]).ToString());
+            }
+
         }
         private void Window_DeleteEvent(object sender, DeleteEventArgs a)
         {
             Application.Quit();
         }
 
-        private async void ForecastFiveDays(object sender, EventArgs a,string lat,string lon,string lang,string namecity)
+        private async void ForecastFiveDays(string lat,string lon,string lang,string namecity)
         {
             string html = string.Empty;
             var client = new HttpClient();
@@ -126,7 +133,11 @@ namespace weather_app
              
         }
 
-        private async void home_button1_Button_Clicked(object sender, EventArgs a)
+        private void home_button1_Button_Clicked(object sender, EventArgs a)
+        {   
+            homeResearch();
+        }
+        private async void homeResearch(string defaultCity = "")
         {   
             String LAng = "";
             string json = File.ReadAllText("options.json");
@@ -149,6 +160,9 @@ namespace weather_app
             home__label7_Label.Text = "";
             home_image_Image.Pixbuf = null;
             String city = home_entry_Entry.Text;
+            if (defaultCity != ""){
+                city = defaultCity;
+            }
             for (int m = 0; m< city.Length; m++)
             {
                 if (city[m] == '0' || city[m] == '1' || city[m] == '2' || city[m] == '3' || city[m] == '4' || city[m] == '5' || city[m] == '6' || city[m] == '7' || city[m] == '8' || city[m] == '9')
@@ -175,7 +189,11 @@ namespace weather_app
             String icon = "";
             dynamic jsonObjgeo = Newtonsoft.Json.JsonConvert.DeserializeObject(content);
             home__label1_Label.Text = LAng;
+            try{
             name = jsonObjgeo[0]["local_names"][LAng];
+            }catch{
+                name = null;
+            }
             if (name == null)
             {
                 name = jsonObjgeo[0]["name"];
@@ -218,7 +236,7 @@ namespace weather_app
                     }
                 }
             }
-            ForecastFiveDays(sender,a,lat,lon,LAng,name);
+            ForecastFiveDays(lat,lon,LAng,name);
             String second = String.Format("https://api.openweathermap.org/data/2.5/weather?lat={0}&lon={1}&units=metric&appid={2}&lang={3}", lat, lon, API_KEY,LAng);
             var otherscontent = await client.GetStringAsync(second);
             Boolean testify9 = false;
