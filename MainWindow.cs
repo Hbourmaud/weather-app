@@ -13,6 +13,13 @@ namespace weather_app
 {
     class MainWindow : Window
     {   
+        string [] languageOption = new []
+        {
+            "Afrikaans", "Albanian", "Arabic", "Azerbaijani", "Bulgarian", "Catalan", "Czech", "Danish", "German", "Greek", "English", "Basque", "Persian (Farsi)", "Finnish", "French", "Galician", "Hebrew", "Hindi", "Croatian", "Hungarian", "Indonesian", "Italian", "Japanese", "Korean", "Latvian", "Lithuanian", "Macedonian", "Norwegian", "Dutch", "Polish", "Portuguese", "Português Brasil", "Romanian", "Russian", "Swedish", "Slovak", "Slovenian", "Spanish", "Serbian", "Thai", "Turkish", "Ukrainian", "Vietnamese", "Chinese Simplified", "Chinese Traditional", "Zulu"
+        };
+        string [] languageAPI = new string[] {
+            "af", "al", "ar", "az", "bg", "ca", "cz", "da", "de", "el", "en", "eu", "fa", "fi", "fr", "gl", "he", "hi", "hr", "hu", "id", "it", "ja", "kr", "la", "lt", "mk", "no", "nl", "pl", "pt", "pt_br", "ro", "ru", "sv", "sk", "sl", "sp", "sr", "th", "tr", "ua", "vi", "zh_cn", "zh_tw", "zu"
+        };
         string API_KEY = System.Environment.GetEnvironmentVariable("API_KEY");
         [UI] private Image home_image_Image = null;
         [UI] private Entry home_entry_Entry = null;
@@ -121,6 +128,18 @@ namespace weather_app
 
         private async void home_button1_Button_Clicked(object sender, EventArgs a)
         {   
+            String LAng = "";
+            string json = File.ReadAllText("options.json");
+            dynamic jsonObj = Newtonsoft.Json.JsonConvert.DeserializeObject(json);
+            String variable = jsonObj["LanguageDefault"];
+            for (int k= 0; k<languageOption.Length; k++)
+            {
+                if (languageOption[k] == variable)
+                    {
+                        LAng = languageAPI[k];
+                        break;
+                    }
+            }
             home__label1_Label.Text = "";
             home__label2_Label.Text = "";
             home__label3_Label.Text = "";
@@ -207,7 +226,7 @@ namespace weather_app
                 }
             }
             ForecastFiveDays(sender,a,lat,lon);
-            String second = String.Format("https://api.openweathermap.org/data/2.5/weather?lat={0}&lon={1}&units=metric&appid={2}", lat, lon, API_KEY);
+            String second = String.Format("https://api.openweathermap.org/data/2.5/weather?lat={0}&lon={1}&units=metric&appid={2}&lang={3}", lat, lon, API_KEY,LAng);
             var otherscontent = await client.GetStringAsync(second);
             Boolean testify9 = false;
             Boolean testify8 = false;
