@@ -77,9 +77,8 @@ namespace weather_app
             Gtk.CssProvider provider = new CssProvider();
             provider.LoadFromPath("style.css");
             Gtk.StyleContext.AddProviderForScreen(Gdk.Screen.Default,provider,800);
-            main_window.StyleContext.AddClass("bg"); ////// Exemple pour appliquer du css sur un élément /////////
+            main_window.StyleContext.AddClass("bg");
             DeleteEvent += Window_DeleteEvent;
-            home_entry_Entry.Text = "a";
 			home__button1_Button.Clicked += home_button1_Button_Clicked;
 			settings_confirm_Button.Clicked += settings_confirm_button_Clicked;
 			settings_confirmLanguage_Button.Clicked += settings_confirmLanguage_button_Clicked;
@@ -99,6 +98,25 @@ namespace weather_app
         private async void ForecastFiveDays(string lat,string lon,string lang,string namecity)
         {
             string html = string.Empty;
+            var fivedays_date_array = new[] { fivedays_date_label1,fivedays_date_label2,fivedays_date_label3,fivedays_date_label4,fivedays_date_label5 };
+            var fivedays_temp_array = new[] { fivedays_temp_label1,fivedays_temp_label2,fivedays_temp_label3,fivedays_temp_label4,fivedays_temp_label5 };
+            var fivedays_img_array = new[] { fivedays_img_image1,fivedays_img_image2,fivedays_img_image3,fivedays_img_image4,fivedays_img_image5 };
+            var fivedays_desc_array = new[] { fivedays_desc_label1,fivedays_desc_label2,fivedays_desc_label3,fivedays_desc_label4,fivedays_desc_label5} ;
+            var fivedays_humid_array = new[] { fivedays_humid_label1,fivedays_humid_label2,fivedays_humid_label3,fivedays_humid_label4,fivedays_humid_label5 };
+            if(namecity == "non-existent")
+            {
+                fivedays_name_label.Text = "non-existent city";
+                for(int k=0;k<5;k++)
+            {
+                fivedays_date_array[k].Text = "";
+                fivedays_temp_array[k].Text = "";
+                fivedays_desc_array[k].Text = "";
+                fivedays_humid_array[k].Text = "";
+                fivedays_coord_label.Text = "";
+                fivedays_img_array[k].Pixbuf = null;
+            }
+                return;
+            }
             var client = new HttpClient();
             html = await client.GetStringAsync(String.Format("https://api.openweathermap.org/data/2.5/forecast?lat={0}&lon={1}&units=metric&lang={2}&appid={3}", lat, lon,lang, API_KEY));
             var result = JsonConvert.DeserializeObject<Item>(html);
@@ -111,13 +129,6 @@ namespace weather_app
                     i++;
                 }
             }
-            
-            var fivedays_date_array = new[] { fivedays_date_label1,fivedays_date_label2,fivedays_date_label3,fivedays_date_label4,fivedays_date_label5 };
-            var fivedays_temp_array = new[] { fivedays_temp_label1,fivedays_temp_label2,fivedays_temp_label3,fivedays_temp_label4,fivedays_temp_label5 };
-            var fivedays_img_array = new[] { fivedays_img_image1,fivedays_img_image2,fivedays_img_image3,fivedays_img_image4,fivedays_img_image5 };
-            var fivedays_desc_array = new[] { fivedays_desc_label1,fivedays_desc_label2,fivedays_desc_label3,fivedays_desc_label4,fivedays_desc_label5} ;
-            var fivedays_humid_array = new[] { fivedays_humid_label1,fivedays_humid_label2,fivedays_humid_label3,fivedays_humid_label4,fivedays_humid_label5 };
-            
             fivedays_name_label.Text = namecity;
             fivedays_coord_label.Text = "lat: "+result.city.coord.lat +" lon: "+result.city.coord.lon;
             
@@ -168,16 +179,23 @@ namespace weather_app
                 if (city[m] == '0' || city[m] == '1' || city[m] == '2' || city[m] == '3' || city[m] == '4' || city[m] == '5' || city[m] == '6' || city[m] == '7' || city[m] == '8' || city[m] == '9')
             {
                 home__label1_Label.Text= "non-existent city";
+                ForecastFiveDays("0","0","en","non-existent");
                 return; 
             }
             }
             using var client = new HttpClient();
             var content = "";
+            try{
             String first = String.Format("http://api.openweathermap.org/geo/1.0/direct?q={0}&limit=5&appid={1}", city, API_KEY);
             content = await client.GetStringAsync(first);
+            }catch{
+                home__label1_Label.Text = "A problem has occured \x0A Check your connection";
+                return;
+            }
             if (content.Length == 2)
             {
                 home__label1_Label.Text= "non-existent city";
+                ForecastFiveDays("0","0","en","non-existent");
                 return; 
             }
             String name ="";
@@ -405,5 +423,4 @@ namespace weather_app
         public string lat;
         public string lon;
     }
-
 }
