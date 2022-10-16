@@ -31,6 +31,7 @@ namespace weather_app
         [UI] private Label home__label6_Label = null;
         [UI] private Label home__label7_Label = null;
         [UI] private Button home__button1_Button = null;
+        [UI] private Button home_conv_Button = null;
 
         [UI] private Window main_window = null;
         [UI] private Label fivedays_name_label = null;
@@ -60,6 +61,7 @@ namespace weather_app
         [UI] private Image fivedays_img_image3 = null;
         [UI] private Image fivedays_img_image4 = null;
         [UI] private Image fivedays_img_image5 = null;
+        [UI] private Button fivedays_conv_button = null;
 
 		[UI] private Label settings_resultCity_Label = null;
 		[UI] private Entry settings_city_Entry = null;
@@ -82,6 +84,8 @@ namespace weather_app
 			home__button1_Button.Clicked += home_button1_Button_Clicked;
 			settings_confirm_Button.Clicked += settings_confirm_button_Clicked;
 			settings_confirmLanguage_Button.Clicked += settings_confirmLanguage_button_Clicked;
+            home_conv_Button.Clicked += conv_button_Clicked;
+            fivedays_conv_button.Clicked += conv_button_Clicked;
             string json = File.ReadAllText("options.json");	
 			dynamic jsonObj = Newtonsoft.Json.JsonConvert.DeserializeObject(json);
 			if(jsonObj["CityDefault"] != "")
@@ -106,7 +110,7 @@ namespace weather_app
             if(namecity == "non-existent")
             {
                 fivedays_name_label.Text = "non-existent city";
-                for(int k=0;k<5;k++)
+            for(int k=0;k<5;k++)
             {
                 fivedays_date_array[k].Text = "";
                 fivedays_temp_array[k].Text = "";
@@ -273,7 +277,7 @@ namespace weather_app
                     {
                         if (otherscontent[j] == ',')
                         {
-                            NeededInformation += "Temperature: " + temp + "°C ";
+                            NeededInformation += "Temperature: " + temp + "°C";
                             testify9 = true;
                             home__label4_Label.Text = NeededInformation;
                             NeededInformation = "";
@@ -289,7 +293,6 @@ namespace weather_app
                     {
                         if (otherscontent[j] == '"')
                         {
-                            //home__label4_Label.Text = icon; // bizarre
                             String picture = String.Format("./img/{0}.png", icon);
                             home_image_Image.Pixbuf = new Gdk.Pixbuf (picture);
                             testify6 = true;
@@ -333,6 +336,27 @@ namespace weather_app
             }
 		}
 
+        private void conv_button_Clicked(object sender, EventArgs a)
+        {
+            if(home__label4_Label.Text == ""){return;}
+            var fivedays_temp_array = new[] { fivedays_temp_label1,fivedays_temp_label2,fivedays_temp_label3,fivedays_temp_label4,fivedays_temp_label5 };
+            var main_temp = Convert.ToDouble((home__label4_Label.Text.Remove(home__label4_Label.Text.Length-2)).Remove(0,13));
+            if(fivedays_temp_label1.Text[fivedays_temp_label1.Text.Length-1] == 'C'){
+                home__label4_Label.Text ="Temperature: "+System.Math.Round(((main_temp*9/5)+32),2).ToString()+"°F";
+                for(int k=0;k<5;k++)
+                {
+                    double temp_toConvert = Convert.ToDouble((fivedays_temp_array[k].Text).Remove((fivedays_temp_array[k].Text).Length-2)) ;
+                    fivedays_temp_array[k].Text = System.Math.Round(((temp_toConvert*9/5)+32),2).ToString()+"°F";
+                }
+            }else{
+                home__label4_Label.Text ="Temperature: "+System.Math.Round(((main_temp-32)*5/9),2).ToString()+"°C";
+                for(int k=0;k<5;k++)
+                {
+                    double temp_toConvert = Convert.ToDouble((fivedays_temp_array[k].Text).Remove((fivedays_temp_array[k].Text).Length-2)) ;
+                    fivedays_temp_array[k].Text = System.Math.Round(((temp_toConvert-32)*5/9),2).ToString()+"°C";
+                }
+            }
+        }
 		private async void settings_confirm_button_Clicked(object sender, EventArgs a)
 		{
 			HttpClient webclient = new HttpClient();

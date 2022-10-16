@@ -7,145 +7,145 @@
       <!-- column-name gchararray1 -->
       <column type="gchararray"/>
     </columns>
-	<data>
-      	<row>
-        	<col id="0" translatable="yes">Afrikaans</col>
-    	</row>
-		      	<row>
-        	<col id="0" translatable="yes">Albanian</col>
-    	</row>
-		      	<row>
-        	<col id="0" translatable="yes">Arabic</col>
-    	</row>
-		      	<row>
-        	<col id="0" translatable="yes">Azerbaijani</col>
-    	</row>
-		      	<row>
-        	<col id="0" translatable="yes">Bulgarian</col>
-    	</row>
-		      	<row>
-        	<col id="0" translatable="yes">Catalan</col>
-    	</row>
-		      	<row>
-        	<col id="0" translatable="yes">Czech</col>
-    	</row>
-		      	<row>
-        	<col id="0" translatable="yes">Danish</col>
-    	</row>
-		      	<row>
-        	<col id="0" translatable="yes">German</col>
-    	</row>
-		      	<row>
-        	<col id="0" translatable="yes">Greek</col>
-    	</row>
-		      	<row>
-        	<col id="0" translatable="yes">English</col>
-    	</row>
-		      	<row>
-        	<col id="0" translatable="yes">Basque</col>
-    	</row>
-		      	<row>
-        	<col id="0" translatable="yes">Persian (Farsi)</col>
-    	</row>
-		      	<row>
-        	<col id="0" translatable="yes">Finnish</col>
-    	</row>
-		      	<row>
-        	<col id="0" translatable="yes">French</col>
-    	</row>
-		      	<row>
-        	<col id="0" translatable="yes">Galician</col>
-    	</row>
-		      	<row>
-        	<col id="0" translatable="yes">Hebrew</col>
-    	</row>
-		      	<row>
-        	<col id="0" translatable="yes">Hindi</col>
-    	</row>
-		      	<row>
-        	<col id="0" translatable="yes">Croatian</col>
-    	</row>
-		      	<row>
-        	<col id="0" translatable="yes">Hungarian</col>
-    	</row>
-		      	<row>
-        	<col id="0" translatable="yes">Indonesian</col>
-    	</row>
-		      	<row>
-        	<col id="0" translatable="yes">Italian</col>
-    	</row>
-		      	<row>
-        	<col id="0" translatable="yes">Japanese</col>
-    	</row>
-		      	<row>
-        	<col id="0" translatable="yes">Korean</col>
-    	</row>
-		      	<row>
-        	<col id="0" translatable="yes">Latvian</col>
-    	</row>
-		      	<row>
-        	<col id="0" translatable="yes">Lithuanian</col>
-    	</row>
-		      	<row>
-        	<col id="0" translatable="yes">Macedonian</col>
-    	</row>
-		      	<row>
-        	<col id="0" translatable="yes">Norwegian</col>
-    	</row>
-		      	<row>
-        	<col id="0" translatable="yes">Dutch</col>
-    	</row>
-		      	<row>
-        	<col id="0" translatable="yes">Polish</col>
-    	</row>
-		      	<row>
-        	<col id="0" translatable="yes">Portuguese</col>
-    	</row>
-		      	<row>
-        	<col id="0" translatable="yes">Português Brasil</col>
-    	</row>
-		      	<row>
-        	<col id="0" translatable="yes">Romanian</col>
-    	</row>
-		      	<row>
-        	<col id="0" translatable="yes">Russian</col>
-    	</row>
-		      	<row>
-        	<col id="0" translatable="yes">Swedish</col>
-    	</row>
-		      	<row>
-        	<col id="0" translatable="yes">Slovak</col>
-    	</row>
-		      	<row>
-        	<col id="0" translatable="yes">Slovenian</col>
-    	</row>
-		      	<row>
-        	<col id="0" translatable="yes">Spanish</col>
-    	</row>
-		      	<row>
-        	<col id="0" translatable="yes">Serbian</col>
-    	</row>
-		      	<row>
-        	<col id="0" translatable="yes">Thai</col>
-    	</row>
-		      	<row>
-        	<col id="0" translatable="yes">Turkish</col>
-    	</row>
-		      	<row>
-        	<col id="0" translatable="yes">Ukrainian</col>
-    	</row>
-		      	<row>
-        	<col id="0" translatable="yes">Vietnamese</col>
-    	</row>
-		      	<row>
-        	<col id="0" translatable="yes">Chinese Simplified</col>
-    	</row>
-		      	<row>
-        	<col id="0" translatable="yes">Chinese Traditional</col>
-    	</row>
-		      	<row>
-        	<col id="0" translatable="yes">Zulu</col>
-    	</row>
+    <data>
+      <row>
+        <col id="0" translatable="yes">Afrikaans</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Albanian</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Arabic</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Azerbaijani</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Bulgarian</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Catalan</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Czech</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Danish</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">German</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Greek</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">English</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Basque</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Persian (Farsi)</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Finnish</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">French</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Galician</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Hebrew</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Hindi</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Croatian</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Hungarian</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Indonesian</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Italian</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Japanese</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Korean</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Latvian</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Lithuanian</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Macedonian</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Norwegian</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Dutch</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Polish</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Portuguese</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Português Brasil</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Romanian</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Russian</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Swedish</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Slovak</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Slovenian</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Spanish</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Serbian</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Thai</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Turkish</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Ukrainian</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Vietnamese</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Chinese Simplified</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Chinese Traditional</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Zulu</col>
+      </row>
     </data>
   </object>
   <object class="GtkWindow" id="main_window">
@@ -175,7 +175,6 @@
                     <property name="height-request">80</property>
                     <property name="visible">True</property>
                     <property name="can-focus">False</property>
-                    <property name="stock">gtk-missing-image</property>
                   </object>
                   <packing>
                     <property name="x">100</property>
@@ -288,6 +287,20 @@
                   </object>
                   <packing>
                     <property name="x">180</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkButton" id="home_conv_Button">
+                    <property name="width-request">250</property>
+                    <property name="height-request">25</property>
+                    <property name="visible">True</property>
+                    <property name="can-focus">True</property>
+                    <property name="receives-default">True</property>
+                    <property name="opacity">0</property>
+                  </object>
+                  <packing>
+                    <property name="x">150</property>
+                    <property name="y">125</property>
                   </packing>
                 </child>
               </object>
@@ -631,6 +644,19 @@
                     <property name="y">400</property>
                   </packing>
                 </child>
+                <child>
+                  <object class="GtkButton" id="fivedays_conv_button">
+                    <property name="width-request">500</property>
+                    <property name="height-request">80</property>
+                    <property name="visible">True</property>
+                    <property name="can-focus">True</property>
+                    <property name="receives-default">True</property>
+                    <property name="opacity">0</property>
+                  </object>
+                  <packing>
+                    <property name="y">200</property>
+                  </packing>
+                </child>
               </object>
               <packing>
                 <property name="name">5 days</property>
@@ -642,107 +668,105 @@
               <object class="GtkFixed" id="settings_Fixed">
                 <property name="visible">True</property>
                 <property name="can-focus">False</property>
-				<child>
-					<object class="GtkLabel" id="settings_city_Label">
-						<property name="visible">True</property>
-						<property name="can-focus">False</property>
-						<property name="label" translatable="yes">City per default : </property>
-					</object>
-					<packing>
-						<property name="x">100</property>
-						<property name="y">25</property>
-					</packing>
-				</child>
-				<child>
-					<object class="GtkLabel" id="settings_resultCity_Label">
-						<property name="visible">True</property>
-						<property name="can-focus">False</property>
-						<property name="label" translatable="yes"></property>
-					</object>
-					<packing>
-						<property name="x">205</property>
-						<property name="y">25</property>
-					</packing>
-				</child>
-				<child>
-					<object class="GtkEntry" id="settings_city_Entry">
+                <child>
+                  <object class="GtkLabel" id="settings_city_Label">
+                    <property name="visible">True</property>
+                    <property name="can-focus">False</property>
+                    <property name="label" translatable="yes">City per default : </property>
+                  </object>
+                  <packing>
+                    <property name="x">100</property>
+                    <property name="y">25</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkLabel" id="settings_resultCity_Label">
+                    <property name="visible">True</property>
+                    <property name="can-focus">False</property>
+                  </object>
+                  <packing>
+                    <property name="x">205</property>
+                    <property name="y">25</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkEntry" id="settings_city_Entry">
                     <property name="width-request">100</property>
                     <property name="height-request">25</property>
                     <property name="visible">True</property>
                     <property name="can-focus">True</property>
-					</object>
-					<packing>
-						<property name="x">100</property>
-						<property name="y">50</property>
-					</packing>
-        		</child>
-				<child>
-					<object class="GtkButton" id="settings_confirm_Button">
-						<property name="label" translatable="yes">confirm</property>
-						<property name="visible">True</property>
-						<property name="can-focus">True</property>
-						<property name="receives-default">True</property>
-					</object>
-					<packing>
-						<property name="x">275</property>
-						<property name="y">50</property>
-					</packing>
-        		</child>
-				<child>
-					<object class="GtkLabel" id="settings_language_Label">
-						<property name="visible">True</property>
-						<property name="can-focus">False</property>
-						<property name="label" translatable="yes">Language per default : </property>
-					</object>
-					<packing>
-						<property name="x">100</property>
-						<property name="y">125</property>
-					</packing>
-				</child>
-				<child>
-					<object class="GtkLabel" id="settings_resultLanguage_Label">
-						<property name="visible">True</property>
-						<property name="can-focus">False</property>
-						<property name="label" translatable="yes"></property>
-					</object>
-					<packing>
-						<property name="x">243</property>
-						<property name="y">125</property>
-					</packing>
-				</child>
-				<child>
-					<object class="GtkComboBox" id="settings_list_ComboBox">
-						<property name="width-request">100</property>
-						<property name="height-request">25</property>
-						<property name="visible">True</property>
-						<property name="can-focus">True</property>
-						<property name="model">liststore1</property>
-						<property name="has-entry">True</property>
-						<property name="entry-text-column">0</property>
-        				<property name="id-column">0</property>
-						<child internal-child="entry">
-						<object class="GtkEntry" id="settings_confirmLanguage_Entry">
-							<property name="can-focus">False</property>
-						</object>
-						</child>
-					</object>
-					<packing>
-						<property name="x">100</property>
-						<property name="y">150</property>
-					</packing>
-        		</child>
-				<child>
-					<object class="GtkButton" id="settings_confirmLanguage_Button">
-						<property name="label" translatable="yes">confirm</property>
-						<property name="visible">True</property>
-						<property name="can-focus">True</property>
-						<property name="receives-default">True</property>
-					</object>
-					<packing>
-						<property name="x">305</property>
-						<property name="y">150</property>
-					</packing>
-        		</child>
+                  </object>
+                  <packing>
+                    <property name="x">100</property>
+                    <property name="y">50</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkButton" id="settings_confirm_Button">
+                    <property name="label" translatable="yes">confirm</property>
+                    <property name="visible">True</property>
+                    <property name="can-focus">True</property>
+                    <property name="receives-default">True</property>
+                  </object>
+                  <packing>
+                    <property name="x">275</property>
+                    <property name="y">50</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkLabel" id="settings_language_Label">
+                    <property name="visible">True</property>
+                    <property name="can-focus">False</property>
+                    <property name="label" translatable="yes">Language per default : </property>
+                  </object>
+                  <packing>
+                    <property name="x">100</property>
+                    <property name="y">125</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkLabel" id="settings_resultLanguage_Label">
+                    <property name="visible">True</property>
+                    <property name="can-focus">False</property>
+                  </object>
+                  <packing>
+                    <property name="x">243</property>
+                    <property name="y">125</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkComboBox" id="settings_list_ComboBox">
+                    <property name="width-request">100</property>
+                    <property name="height-request">25</property>
+                    <property name="visible">True</property>
+                    <property name="can-focus">True</property>
+                    <property name="model">liststore1</property>
+                    <property name="has-entry">True</property>
+                    <property name="entry-text-column">0</property>
+                    <property name="id-column">0</property>
+                    <child internal-child="entry">
+                      <object class="GtkEntry" id="settings_confirmLanguage_Entry">
+                        <property name="can-focus">False</property>
+                      </object>
+                    </child>
+                  </object>
+                  <packing>
+                    <property name="x">100</property>
+                    <property name="y">150</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkButton" id="settings_confirmLanguage_Button">
+                    <property name="label" translatable="yes">confirm</property>
+                    <property name="visible">True</property>
+                    <property name="can-focus">True</property>
+                    <property name="receives-default">True</property>
+                  </object>
+                  <packing>
+                    <property name="x">305</property>
+                    <property name="y">150</property>
+                  </packing>
+                </child>
               </object>
               <packing>
                 <property name="name">settings</property>
